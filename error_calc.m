@@ -45,10 +45,24 @@ classdef error_calc
             new_err = sqrt(((obj.err/obj.meas))^2 + (val.err/val.meas)^2) * new_meas;
             ret = error_calc(new_meas, new_err);
         end
+        function ret = uminus(obj)
+            ret = error_calc(-obj.meas, obj.err);
+        end
         function ret = sqrt(obj)
             new_meas = sqrt(obj.meas);
             new_err = (1/2) * (obj.err/obj.meas) * new_meas;
             ret = error_calc(new_meas, new_err);
+        end
+        function ret = acos(obj)
+            new_meas = acos(obj.meas);
+            new_err = (1/(sqrt(1-(obj.meas)^2))) * obj.err
+            ret = error_calc(new_meas, new_err);
+        end
+        function ret = sp(obj)
+            ret = sprintf("%f \\pm %f", obj.meas, obj.err);
+        end
+        function ret = rel(obj)
+            ret = obj.err / obj.meas;
         end
     end
 end
