@@ -53,6 +53,11 @@ classdef error_calc
             new_err = (1/2) * (obj.err/obj.meas) * new_meas;
             ret = error_calc(new_meas, new_err);
         end
+        function ret = acos(obj)
+            new_meas = acos(obj.meas);
+            new_err = (1/(sqrt(1-(obj.meas)^2))) * obj.err
+            ret = error_calc(new_meas, new_err);
+        end
         function ret = sp(obj)
             ret = sprintf("%f \\pm %f", obj.meas, obj.err);
         end
